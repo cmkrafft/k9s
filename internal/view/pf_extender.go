@@ -56,10 +56,6 @@ func (p *PortForwardExtender) portFwdCmd(evt *tcell.EventKey) *tcell.EventKey {
 		p.App().Flash().Errf("pod must be running. Current status=%v", pod.Status.Phase)
 		return nil
 	}
-	if p.App().factory.Forwarders().IsPodForwarded(path) {
-		p.App().Flash().Errf("A PortForward already exists for pod %s", pod.Name)
-		return nil
-	}
 	if err := showFwdDialog(p, podName, startFwdCB); err != nil {
 		p.App().Flash().Err(err)
 	}
